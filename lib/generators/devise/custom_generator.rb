@@ -24,10 +24,12 @@ module Devise
           controllers.each do |name|
             puts name 
             template "controllers/#{name}_controller.rb",
-                     "app/controllers/#{scope}/#{name}_controller.rb"
+                     "app/controllers/#{scope.pluralize}/#{name}_controller.rb"
           end
         end
       end
+
+      
         
     end
   end

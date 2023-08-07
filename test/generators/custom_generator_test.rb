@@ -24,7 +24,7 @@ class CustomGeneratorTest < Rails::Generators::TestCase
     end
 
     test "Assert Controllers are created" do
-        capture(:stderr) { run_generator %w(user)}
+        capture(:stderr) { run_generator %w(user) }
         #assert_file "app/controllers/users/sessions_controller.rb"
         assert_file "app/controllers/users/registrations_controller.rb"
         assert_file "app/controllers/users/confirmations_controller.rb"
@@ -32,4 +32,11 @@ class CustomGeneratorTest < Rails::Generators::TestCase
         assert_file "app/controllers/users/unlocks_controller.rb"
         assert_file "app/controllers/users/omniauth_callbacks_controller.rb"
     end
+    test "Assert Scope is passed to Controllers" do
+        capture(:stderr) { run_generator %w(HELLOWORLD) }
+        assert_file "app/controllers/users/registrations_controller.rb" do |content|
+            assert_match(/HELLOWORLD/ , content)
+        end
+    end
+
 end
