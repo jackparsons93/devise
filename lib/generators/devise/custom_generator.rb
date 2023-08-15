@@ -19,8 +19,6 @@ module Devise
           
           #@scope_prefix = scope.blank? ? '' : (scope.camelize + '::')
           controllers = %w(confirmations passwords registrations sessions unlocks omniauth_callbacks)
-          template "controllers/registrations_controller.rb",
-          "app/controllers/users/registrations_controller.rb"
           if scope
           controllers.each do |name|
             puts name 
@@ -29,6 +27,9 @@ module Devise
           end
         end
       end
+      #def create_views
+       # registrations_views = %w(edit new)
+
 
       
         
