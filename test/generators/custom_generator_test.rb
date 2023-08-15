@@ -39,9 +39,10 @@ class CustomGeneratorTest < Rails::Generators::TestCase
         end
     end
     test "Assert Attributes is passed to Controllers" do
-        capture(:stderr) { run_generator %w(user -a name:string username:string) }
+        capture(:stderr) { run_generator %w(user -a name:string username:hash) }
         assert_file "app/controllers/users/registrations_controller.rb" do |content|
             assert_match(/username/ , content)
+            assert_no_match(/hash/ ,content)
         end
     end
 

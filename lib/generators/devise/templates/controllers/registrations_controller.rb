@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-
+<% key_array=[] -%>
+<% options[:attributes].each_key { |key| key_array.push(":" + key )} -%>
 class <%= if scope; scope.pluralize; end %>RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
@@ -45,13 +46,13 @@ class <%= if scope; scope.pluralize; end %>RegistrationsController < Devise::Reg
     
  
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [<%= options[:attributes].each { |key, value| ":#{key}, " } %>])
+    devise_parameter_sanitizer.permit(:sign_up, keys: <%= key_array %>)
   end
   
  
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [<%= options[:attributes].each { |key, value| ":#{key}, " } %>])
+    devise_parameter_sanitizer.permit(:account_update, keys: <%= key_array %>)
   end
 
   # The path used after sign up.
