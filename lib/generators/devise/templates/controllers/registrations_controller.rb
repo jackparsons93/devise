@@ -41,11 +41,11 @@ class <%= if scope; scope.pluralize; end %>RegistrationsController < Devise::Reg
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  <% options[:attributes].each do |name, type| -%>
+
     
  
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [options[:attributes].each { |key, value| "Key: #{key}, Value: #{value}" }])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [<%= options[:attributes].each { |key, value| "Key: #{key}, Value: #{value}" } %>])
   end
   
  
