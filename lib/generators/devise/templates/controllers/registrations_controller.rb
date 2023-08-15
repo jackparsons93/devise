@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class <%= @scope_plural %>RegistrationsController < Devise::RegistrationsController
+class <%= if scope; scope.pluralize; end %>RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -41,14 +41,18 @@ class <%= @scope_plural %>RegistrationsController < Devise::RegistrationsControl
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
-
+  <% options[:attributes].each do |name, type| -%>
+    
+ 
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [<%= name %>])
+  end
+  <% end -%>
+ 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:<%= scope %>])
-  # end
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: [:<%= scope %>])
+  end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)

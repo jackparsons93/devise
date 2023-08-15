@@ -4,8 +4,9 @@ module Devise
   module Generators
     class CustomGenerator < Rails::Generators::Base
       # CONTROLLERS = %w(confirmations passwords registrations sessions unlocks omniauth_callbacks).freeze
-
+      
       argument :scope, required: false
+      class_option :attributes, aliases: "-a", type: :hash, default: {}
         source_root File.expand_path('templates', __dir__)
         def copy_model
           if scope

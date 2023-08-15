@@ -38,5 +38,11 @@ class CustomGeneratorTest < Rails::Generators::TestCase
             assert_match(/HELLOWORLD/ , content)
         end
     end
+    test "Assert Attributes is passed to Controllers" do
+        capture(:stderr) { run_generator %w(HELLOWORLD -a name:string username:string) }
+        assert_file "app/controllers/users/registrations_controller.rb" do |content|
+            assert_match(/nameusername/ , content)
+        end
+    end
 
 end
