@@ -37,6 +37,7 @@ if DEVISE_ORM == :active_record
     test "update model migration when model exists" do
       run_generator %w(monster)
       assert_file "app/models/monster.rb"
+      binding.pry
       run_generator %w(monster)
       assert_migration "db/migrate/add_devise_to_monsters.rb"
     end

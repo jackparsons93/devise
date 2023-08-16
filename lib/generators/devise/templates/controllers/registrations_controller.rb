@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 <% key_array=[] -%>
-<% options[:attributes].each_key { |key| key_array.push(":" + key )} -%>
+<% options[:attributes].each_key { |key| key_array.push( key.to_sym )} -%>
 class <%= if scope; scope.pluralize; end %>RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]

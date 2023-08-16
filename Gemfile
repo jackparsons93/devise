@@ -12,7 +12,7 @@ gem "rdoc"
 gem "rails-controller-testing", github: "rails/rails-controller-testing"
 
 gem "responders", "~> 3.1"
-
+gem 'pry', '~> 0.14.2'
 group :test do
   gem "omniauth-facebook"
   gem "omniauth-openid"

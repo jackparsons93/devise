@@ -24,12 +24,52 @@ module Devise
             puts name 
             template "controllers/#{name}_controller.rb",
                      "app/controllers/#{scope.pluralize}/#{name}_controller.rb"
+            end
           end
         end
-      end
-      #def create_views
-       # registrations_views = %w(edit new)
+        
+        def view_template
+view=<<RUBY
+          <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= f.error_notification %>
+          
+            <div class="form-inputs">
+              <%= f.input :email,
+                          required: true,
+                          autofocus: true,
+                          input_html: { autocomplete: "email" }%>
+              <%= f.input :password,
+                          required: true,
+                          hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                          input_html: { autocomplete: "new-password" } %>
+              <%= f.input :password_confirmation,
+                          required: true,
+                          input_html: { autocomplete: "new-password" } %>
+RUBY
+              options[:attributes].each_key do |key|
+                view << "\t\t\t\t<%= f.input :#{key} %> \n"
+              end
+bottom_view=<<RUBY
+          </div>
 
+          <div class="form-actions">
+            <%= f.button :submit, "Sign up" %>
+          </div>
+        <% end %>
+        
+        <%= render "devise/shared/links" %>
+RUBY
+
+          view << bottom_view
+          view
+
+        end
+
+        def create_views
+          if scope
+          template "registrations/new.html.erb", "app/views/#{scope.pluralize}/registrations/new.html.erb"
+          end
+        end
 
       
         
