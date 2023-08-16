@@ -48,6 +48,21 @@ class CustomGeneratorTest < Rails::Generators::TestCase
             assert_match(/name/ , content)
             assert_match(/phone_number/ , content)
         end
+        #binding.pry
+    end
+
+    test "Assert migration is copied" do
+        capture(:stderr) { run_generator %w(user -a name:string phone_number:integer) }
+        assert_file "db/migrate/testmigration_devise_create_users.rb" do |content|
+            assert_match(/phone_number/, content)
+        end
+        #binding.pry
+    end
+    test "Assert routes.rb is copied" do
+        capture(:stderr) { run_generator %w(user -a name:string phone_number:integer) }
+        assert_file "config/routes.rb" do |content|
+            assert_match(/user/, content)
+        end
         binding.pry
     end
 end
