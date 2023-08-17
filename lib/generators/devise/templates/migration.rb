@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-<% table_name=scope.pluralize -%>
+<% table_name=scope.pluralize.downcase -%>
 class DeviseCreate<%= table_name.camelize %> < ActiveRecord::Migration[7.0]
   def change
     create_table :<%= table_name %> do |t|

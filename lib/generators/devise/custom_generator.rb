@@ -10,7 +10,7 @@ module Devise
         source_root File.expand_path('templates', __dir__)
         def copy_model
           if scope
-          template "model.rb", "app/models/#{scope}.rb"
+          template "model.rb", "app/models/#{scope.downcase}.rb"
           else 
             template "model.rb", "app/models/model.rb"
           end
@@ -23,7 +23,7 @@ module Devise
           controllers.each do |name|
             puts name 
             template "controllers/#{name}_controller.rb",
-                     "app/controllers/#{scope.pluralize}/#{name}_controller.rb"
+                     "app/controllers/#{scope.pluralize.downcase}/#{name}_controller.rb"
             end
           end
         end
@@ -69,7 +69,7 @@ RUBY
 
         def create_views
           if scope
-          template "registrations/new.html.erb", "app/views/#{scope.pluralize}/registrations/new.html.erb"
+          template "registrations/new.html.erb", "app/views/#{scope.pluralize.downcase}/registrations/new.html.erb"
           end
         end
         def migration_data
@@ -117,6 +117,7 @@ RUBY
             template "routes.rb" , "config/routes.rb"
           end
         end
+        
     end
   end
 end
