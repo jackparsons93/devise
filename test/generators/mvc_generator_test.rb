@@ -12,7 +12,7 @@ class MvcGeneratorTest < Rails::Generators::TestCase
     
   end
   test "Assert model is created with test passed" do
-    run_generator %w(test)
+    run_generator %w(test -a username:string phone:integer)
     
     assert_file "app/models/test.rb"
     binding.pry
