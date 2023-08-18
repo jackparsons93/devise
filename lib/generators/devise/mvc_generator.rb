@@ -40,7 +40,7 @@ module Devise
         return view_string
     end
       
-      def add_devise_authentication_filter_to_application_controller
+      def add_view_data_to_views
         insert_into_file "app/views/#{name.pluralize}/registrations/new.html.erb", "#{configure_data_for_views}\n", before: /<div class="actions">/
       end
     end
