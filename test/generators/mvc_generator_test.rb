@@ -7,7 +7,7 @@ class MvcGeneratorTest < Rails::Generators::TestCase
 
   test "Assert model is created with monster passed" do
     run_generator %w(monster)
-    #binding.pry
+    
     assert_file "app/models/monster.rb"
     
   end
@@ -18,7 +18,8 @@ class MvcGeneratorTest < Rails::Generators::TestCase
   end
   test "Assert model is created with attributes is  passed" do
     run_generator %w(test name:string phone_number:integer) 
-    assert_file "app/models/test.rb"
     binding.pry
+    assert_file "app/models/test.rb"
+    
   end
 end

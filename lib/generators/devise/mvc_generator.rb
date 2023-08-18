@@ -9,7 +9,7 @@ module Devise
     class MvcGenerator < ActiveRecord::Generators::Base
       include Rails::Generators::ResourceHelpers
       source_root File.expand_path('templates', __dir__)
-      argument :attributes, type: :hash, default: {}
+      argument :attributes, type: :array, default: [], banner: "field:type field:type"
       def invoke_model
         invoke ActiveRecord::Generators::DeviseGenerator
       end
@@ -27,13 +27,16 @@ module Devise
       invoke Devise::Generators::ControllersGenerator
       end
 
+      #<% attributes.each do |attribute| -%>
+      #  t.<%= attribute.type %> :<%= attribute.name %>
+      #<% end -%>
       def configure_data_for_views
         view_string=""
         if attributes
           attributes.each do |attribute|
             view_string << '<div class="field">'+ "\n"
-            view_string << "<p><%= f.label :#{attribute.name[0]} %></p>"+"\n"
-            view_string << "<p><%= f.text_field  :#{attribute.name[0]},  %></p>" +"\n"
+            view_string << "<p><%= f.label :#{attribute.name} %></p>"+"\n"
+            view_string << "<p><%= f.text_field  :#{attribute.name},  %></p>" +"\n"
             view_string << "</div>" +"\n"
           end
         end
