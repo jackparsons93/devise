@@ -7,7 +7,7 @@ module Devise
     class DeviseGenerator < Rails::Generators::NamedBase
       include Rails::Generators::ResourceHelpers
 
-      namespace "devise"
+      #namespace "devise"
       source_root File.expand_path("../templates", __FILE__)
 
       desc "Generates a model with the given NAME (if one does not exist) with devise " \
@@ -16,7 +16,7 @@ module Devise
       hook_for :orm, required: true
 
       class_option :routes, desc: "Generate routes", type: :boolean, default: true
-
+      argument :attributes, type: :hash, default:{}
       def add_devise_routes
         devise_route  = "devise_for :#{plural_name}".dup
         devise_route << %Q(, class_name: "#{class_name}") if class_name.include?("::")

@@ -4,6 +4,8 @@ require 'rails/generators/active_record'
 require 'generators/devise/orm_helpers'
 require 'generators/devise/devise_generator.rb'
 require "generators/devise/views_generator.rb"
+require "generators/devise/devise_generator.rb"
+require 'rails/generators/named_base'
 module Devise
   module Generators
     class MvcGenerator < ActiveRecord::Generators::Base
@@ -13,18 +15,18 @@ module Devise
       def invoke_model
         invoke ActiveRecord::Generators::DeviseGenerator
       end
-      def copy_routes
-          template "routes.rb" , "config/routes.rb"
-      end
-
-              
+      #def copy_routes
+      #    template "routes.rb" , "config/routes.rb"
+      #end
+    
+        
       def create_views
-      invoke Devise::Generators::ViewsGenerator
+        invoke Devise::Generators::ViewsGenerator
       end
 
   
       def create_controllers
-      invoke Devise::Generators::ControllersGenerator
+        invoke Devise::Generators::ControllersGenerator
       end
 
       #<% attributes.each do |attribute| -%>
@@ -45,6 +47,9 @@ module Devise
       
       def add_view_data_to_views
         insert_into_file "app/views/#{name.pluralize}/registrations/new.html.erb", "#{configure_data_for_views}\n", before: /<div class="actions">/
+      end
+      def copy_routes
+        invoke Devise::Generators::DeviseGenerator
       end
     end
   end
