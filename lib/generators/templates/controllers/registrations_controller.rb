@@ -42,9 +42,9 @@ class <%= @scope_prefix %>RegistrationsController < Devise::RegistrationsControl
 
   # If you have extra params to permit, append them to the sanitizer.
   <% key_array=[] -%>
-  <%# attributes.each { |attribute| key_array.push( attribute.name.to_sym )} -%>
+  <% attributes.each_key { |key| key_array.push( key.to_sym )} -%>
   # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: <%=!key_array.empty? ? key_array : "[:attribute]" %>)
+  #   devise_parameter_sanitizer.permit(:sign_up, keys: <%=key_array.empty? ? key_array : "[:attributes]" %>)
   # end
 
   # If you have extra params to permit, append them to the sanitizer.
