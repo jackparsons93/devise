@@ -35,6 +35,11 @@ class ControllersGeneratorTest < Rails::Generators::TestCase
     assert_no_file "app/controllers/users/omniauth_callbacks_controller.rb"
   end
 
+  test "Assert arguments is passed to  controllers with scope" do
+    run_generator %w(users name:string)
+   
+  end
+
   private
 
     def assert_class_names(scope, options = {})

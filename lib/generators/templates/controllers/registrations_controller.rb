@@ -41,8 +41,9 @@ class <%= @scope_prefix %>RegistrationsController < Devise::RegistrationsControl
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
+  
   # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
+  #   devise_parameter_sanitizer.permit(:sign_up, keys: [<%=attributes%>])
   # end
 
   # If you have extra params to permit, append them to the sanitizer.

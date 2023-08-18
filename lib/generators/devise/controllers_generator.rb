@@ -28,6 +28,7 @@ module Devise
         desc: "The scope to create controllers in, e.g. users, admins"
       class_option :controllers, aliases: "-c", type: :array,
         desc: "Select specific controllers to generate (#{CONTROLLERS.join(', ')})"
+      argument :attributes, type: :hash, default:{}
 
       def create_controllers
         @scope_prefix = scope.blank? ? '' : (scope.camelize + '::')

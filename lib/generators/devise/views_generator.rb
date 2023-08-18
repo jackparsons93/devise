@@ -126,6 +126,8 @@ module Devise
 
       argument :scope, required: false, default: nil,
                        desc: "The scope to copy views to"
+              
+      argument :attributes, type: :hash, default:{}
 
       invoke SharedViewsGenerator
 
