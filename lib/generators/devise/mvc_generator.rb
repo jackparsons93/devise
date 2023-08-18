@@ -4,7 +4,7 @@ require 'rails/generators/active_record'
 require 'generators/devise/orm_helpers'
 require 'generators/devise/devise_generator.rb'
 require "generators/devise/views_generator.rb"
-require "generators/devise/devise_generator.rb"
+require "generators/devise/controllers_generator.rb"
 require 'rails/generators/named_base'
 module Devise
   module Generators
