@@ -15,9 +15,9 @@ module Devise
       def invoke_model
         invoke ActiveRecord::Generators::DeviseGenerator
       end
-      #def copy_routes
-      #    template "routes.rb" , "config/routes.rb"
-      #end
+      def copy_routes
+          template "routes.rb" , "config/routes.rb"
+      end
     
         
       def create_views
@@ -48,9 +48,7 @@ module Devise
       def add_view_data_to_views
         insert_into_file "app/views/#{name.pluralize}/registrations/new.html.erb", "#{configure_data_for_views}\n", before: /<div class="actions">/
       end
-      def copy_routes
-        invoke Devise::Generators::DeviseGenerator
-      end
+
     end
   end
 end
